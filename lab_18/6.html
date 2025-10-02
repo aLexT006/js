@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Перемещение</TITLE>
+	<script type="text/javascript">
+		var stop = 100
+		var n// номер кадра, в который вставляется изображение 
+		var d = document
+		// предварительная загрузка изображений 
+		imgempty = new Image()
+		imgempty.src = "7_l.jpg"
+		imganim = new Image()
+		imganim.src = "P.jpg"
+		// функция, осуществляющая анимацию 
+		function anim1() {
+			var len = d.images.length
+			if (n != stop) {
+				n = n + 1
+				if (n > len) {
+					n = 1;
+					d.images[n - 1].src = imganim.src
+					d.images[len - 1].src = imgempty.src
+				}
+				else {
+					d.images[n - 2].src = imgempty.src
+					d.images[n - 1].src = imganim.src
+				}
+				setTimeout("anim1()", 500)
+			}
+		}
+		// функция для задания начальной позиции 
+		functionst()
+		{
+			d.images[0].src = imganim.src
+			for (var i = 1; i <= d.images.length - 1; i++)
+				d.images[i].src = imgempty.src
+		} 
+	</script>
+</head>
+
+<body>
+	<h4 align=left>Простая анимация</h4>
+	<hr>
+	<img src=../lab_18/img/7_l.jpg>
+	<img src=../lab_18/img/P.jpg>
+	<img src=../lab_18/img/P.jpg>
+	<img src=../lab_18/img/P.jpg>
+	<img src=../lab_18/img/P.jpg>
+	<img src=../lab_18/img/P.jpg>
+	<img src=../lab_18/img/P.jpg>
+	<img src=../lab_18/img/P.jpg>
+	<hr>
+	<FORM name="form1">
+		<input type="button" value=Начало onClick="n = stop; st()">
+		<input type="button" value=Запустить onClick="n=1; anim1()">
+	</form>
+</body>
+
+</html>

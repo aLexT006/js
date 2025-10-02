@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Объект style</title>
+	<script type='text/javaScript'>
+		function disp1() {
+			if(md.style.display == ""){
+				md.style.display ="none";
+				a1.style.paddingLeft ="0px";
+			}
+			else{
+				md.style.display ="";
+				a1.style.paddingLeft = "130px";
+			}
+			window.close();
+		}
+	</script>
+</head>
+
+<body>
+	<a href="#" id="а1" onClick="disp1();">test</a>
+	<div id="md" style="display: none;">
+		<img src="../lab_18/img/js.png" onClick="disp();" width="100px">
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Приближающееся изображение</title>
+	<script>
+		// Эффект приближения изображения
+		var h = 100; // Начальная высота (изображение маленькое)
+		var maxHeight = 300; // Максимальная высота, до которой будем увеличивать
+
+		function zoomIn() {
+			if (h < maxHeight) {
+				h = h + 10; // Увеличиваем высоту
+				document.images[0].height = h;
+				setTimeout("zoomIn()", 50); // Уменьшил интервал для плавности
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<H4>При наведении курсора мыши на рисунок<br>
+		изображение начинает приближаться к зрителю </H4>
+	<img src="../lab_18/img/brest_zhazhda.jpg" onMouseOver="zoomIn()" height="100" name="mypict">
+</body>
+
+</html>

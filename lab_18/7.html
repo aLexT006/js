@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Пульсирующее изображение</title>
+	<style>
+		body {
+			text-align: left;
+			margin-top: 50px;
+			font-family: Arial, sans-serif;
+		}
+
+		img {
+			transition: all 0.2s ease;
+			/* плавное изменение размера */
+		}
+	</style>
+	<script>
+		var imgHeight = 200;      // начальная высота
+		var growing = true;       // направление изменения: true = увеличиваем, false = уменьшаем
+		var minHeight = 200;      // минимальный размер
+		var maxHeight = 300;      // максимальный размер
+
+		function pulse() {
+			if (growing) {
+				imgHeight += 5;
+				if (imgHeight >= maxHeight) growing = false;
+			} else {
+				imgHeight -= 5;
+				if (imgHeight <= minHeight) growing = true;
+			}
+			document.getElementById("pulseImg").height = imgHeight;
+		}
+
+		window.onload = function () {
+			setInterval(pulse, 100); // пульсация каждые 100 мс
+		}
+	</script>
+</head>
+
+<body>
+
+	<h2>Пульсирующее изображение</h2>
+	<img src="../lab_18/img/serde4ko.gif" id="pulseImg" height="200" alt="Пульсирующее изображение">
+
+</body>
+
+</html>
