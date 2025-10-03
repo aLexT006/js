@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Тип треугольника</title>
+	<style>
+		body {
+			font-family: Arial;
+			margin: 20px;
+		}
+
+		input {
+			padding: 5px;
+			margin: 5px;
+			width: 80px;
+		}
+
+		button {
+			padding: 8px 15px;
+			margin: 10px 5px;
+		}
+
+		#result {
+			margin: 15px 0;
+			padding: 10px;
+		}
+
+		.triangle {
+			margin: 10px 0;
+		}
+
+		.equilateral {
+			width: 0;
+			height: 0;
+			border-left: 40px solid transparent;
+			border-right: 40px solid transparent;
+			border-bottom: 70px solid green;
+		}
+
+		.isosceles {
+			width: 0;
+			height: 0;
+			border-left: 25px solid transparent;
+			border-right: 55px solid transparent;
+			border-bottom: 70px solid blue;
+		}
+
+		.scalene {
+			width: 0;
+			height: 0;
+			border-left: 20px solid transparent;
+			border-right: 60px solid transparent;
+			border-bottom: 70px solid orange;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Тип треугольника</h2>
+
+	<form>
+		Сторона A: <input type="number" value="5"><br>
+		Сторона B: <input type="number" value="5"><br>
+		Сторона C: <input type="number" value="5"><br>
+
+		<button type="button" onclick='
+            const a = parseInt(document.forms[0].elements[0].value);
+            const b = parseInt(document.forms[0].elements[1].value);
+            const c = parseInt(document.forms[0].elements[2].value);
+            const result = document.getElementById("result");
+            
+            result.innerHTML = "";
+            
+            if (a + b > c && a + c > b && b + c > a) {
+                if (a === b && b === c) {
+                    result.innerHTML = "Равносторонний треугольник<div class=\"triangle equilateral\"></div>";
+                } else if (a === b || a === c || b === c) {
+                    result.innerHTML = "Равнобедренный треугольник<div class=\"triangle isosceles\"></div>";
+                } else {
+                    result.innerHTML = "Разносторонний треугольник<div class=\"triangle scalene\"></div>";
+                }
+            } else {
+                result.innerHTML = "Треугольник не существует";
+            }
+        '>Проверить</button>
+
+		<button type="button" onclick='
+            document.forms[0].elements[0].value = "";
+            document.forms[0].elements[1].value = "";
+            document.forms[0].elements[2].value = "";
+            document.getElementById("result").innerHTML = "";
+        '>Очистить</button>
+	</form>
+
+	<div id="result"></div>
+</body>
+
+</html>

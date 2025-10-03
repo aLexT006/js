@@ -13,14 +13,14 @@
 
 		img {
 			transition: all 0.2s ease;
-			/* плавное изменение размера */
+
 		}
 	</style>
 	<script>
-		var imgHeight = 200;      // начальная высота
-		var growing = true;       // направление изменения: true = увеличиваем, false = уменьшаем
-		var minHeight = 200;      // минимальный размер
-		var maxHeight = 300;      // максимальный размер
+		var imgHeight = 200;
+		var growing = true;
+		var minHeight = 200;
+		var maxHeight = 300;
 
 		function pulse() {
 			if (growing) {
@@ -34,7 +34,7 @@
 		}
 
 		window.onload = function () {
-			setInterval(pulse, 100); // пульсация каждые 100 мс
+			setInterval(pulse, 100);
 		}
 	</script>
 </head>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Флаги стран</title>
+	<style>
+		body {
+			text-align: center;
+			font-family: Arial;
+		}
+
+		.flag {
+			width: 100px;
+			margin: 10px;
+			border: 2px solid black;
+		}
+
+		.country {
+			padding: 10px;
+			margin: 5px;
+			background: lightblue;
+			display: inline-block;
+		}
+
+		.correct {
+			background: lightgreen;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Найди флаг страны</h2>
+	<h3>Сначала выбирите название страны, а потом флаг</h3>
+
+	<div>
+
+		<img src="../lab_18/img/7rusflag.jpg" class="flag" onclick="checkCountry('Россия')">
+		<img src="../lab_18/img/7deuflag.jpg" class="flag" onclick="checkCountry('Германия')">
+		<img src="../lab_18/img/7engflag.jpg" class="flag" onclick="checkCountry('Великобритания')">
+		<img src="../lab_18/img/7chehflag.jpg" class="flag" onclick="checkCountry('Чехия')">
+		<img src="../lab_18/img/7belflag.jpg" class="flag" onclick="checkCountry('Беларусь')">
+	</div>
+
+	<div>
+		<div class="country" onclick="selectCountry('Чехия')">Чехия</div>
+		<div class="country" onclick="selectCountry('Беларусь')">Беларусь</div>
+		<div class="country" onclick="selectCountry('Германия')">Германия</div>
+		<div class="country" onclick="selectCountry('Великобритания')">Великобритания</div>
+		<div class="country" onclick="selectCountry('Россия')">Россия</div>
+	</div>
+
+	<p id="result"></p>
+
+	<script>
+		let selectedCountry = '';
+
+		function selectCountry(country) {
+			selectedCountry = country;
+			document.getElementById('result').textContent = 'Выбрана: ' + country;
+		}
+
+		function checkCountry(flagCountry) {
+			if (selectedCountry === '') {
+				document.getElementById('result').textContent = 'Сначала выберите страну!';
+				return;
+			}
+
+			if (selectedCountry === flagCountry) {
+				document.getElementById('result').textContent = 'Правильно! Это флаг ' + flagCountry;
+				document.querySelectorAll('.country').forEach(item => {
+					if (item.textContent === flagCountry) {
+						item.classList.add('correct');
+					}
+				});
+			} else {
+				document.getElementById('result').textContent = 'Неправильно! Это флаг ' + flagCountry;
+			}
+		}
+	</script>
+</body>
+
+</html>
