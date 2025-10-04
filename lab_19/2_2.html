@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Объект DOM</title>
+	<script>
+		function F1(element, color) {
+			element.style.backgroundColor = color;
+		}
+	</script>
+</head>
+
+<body>
+	<p onClick="F1(this, 'pink')">Кликни здесь, и этот абзац станет розовым</p>
+	<p onSelectStart="F1(this, 'lime')">Выдели этот текст, и его фон станет зеленым</p>
+</body>
+
+</html>

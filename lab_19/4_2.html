@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Удаление метода</title>
+</head>
+
+<body>
+	<p id="elem1">Если выделить текст, кнопка не сработает</p>
+	<input type="button" id="elem2" value="Нажми меня">
+	<script>
+		function handler1() {
+			this.style.color = "blue";
+			elem2.style.textDecotation = "line-through";
+			elem2.removeEventListener("click", handler2);
+		}
+		function handler2() {
+			alert('Событие 1 произошло!');
+		}
+		elem1.addEventListener("selectstart", handler1);
+		elem2.addEventListener("click", handler2);
+	</script>
+</body>
+
+</html>

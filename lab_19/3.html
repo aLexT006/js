@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM</title>
+</head>
+
+<body>
+	<input type=button id="elem" value="Нажми меня">
+	<input type=button value="жми..." onClick="f1(this)">
+	<script>
+		function f1(obj) {
+			obj.style.color = "lime";
+		}
+		function f2() {
+			alert('Событие произошло!');
+		};
+		elem.onClick = f2;
+	</script>
+</body>
+
+</html>

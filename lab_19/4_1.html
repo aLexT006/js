@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Два обработчика</title>
+</head>
+
+<body>
+	<input type="button" id="elem" value="Нажми меня">
+	<script>
+		function handler1() {
+			alert('Событие 1 произошло!');
+		}
+		function handler2() {
+			alert('Событие 2 произошло!');
+		}
+		elem.addEventListener("click", handler1);
+		elem.addEventListener("click", handler2);
+	</script>
+</body>
+
+</html>
