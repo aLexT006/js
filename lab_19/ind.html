@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<input type="text" id="input" placeholder="Введите текст">
+	<div id="output"></div>
+
+	<script>
+		const input = document.getElementById('input');
+		const output = document.getElementById('output');
+
+		input.addEventListener('keydown', function (e) {
+			output.innerHTML = `
+      Нажата клавиша: ${e.key}<br>
+      Код клавиши: ${e.code}<br>
+      Зажат Ctrl: ${e.ctrlKey}<br>
+      Зажат Shift: ${e.shiftKey}
+    `;
+
+			// Если нажали Enter
+			if (e.key === 'Enter') {
+				output.innerHTML += '<br>Вы нажали Enter!';
+			}
+		});
+
+		// Следим за движением мыши
+		document.addEventListener('mousemove', function (e) {
+			const mouseInfo = document.createElement('div');
+			mouseInfo.textContent = `Мышь: X=${e.clientX}, Y=${e.clientY}`;
+			mouseInfo.style.position = 'fixed';
+			mouseInfo.style.top = '10px';
+			mouseInfo.style.right = '10px';
+			mouseInfo.style.background = 'white';
+			mouseInfo.style.border = '1px solid black';
+			mouseInfo.style.padding = '5px';
+
+			// Удаляем старую информацию
+			const oldInfo = document.querySelector('.mouse-info');
+			if (oldInfo) oldInfo.remove();
+
+			mouseInfo.classList.add('mouse-info');
+			document.body.appendChild(mouseInfo);
+		});
+	</script>
+</body>
+
+</html>
