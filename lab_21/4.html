@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<form>
+		<fieldset>
+			<legend align=right>ССО</legend>
+			<label>Код специальности:</label><input placeholder="2-40 01 01">
+			<label>Название специальности:
+			</label><input required>
+		</fieldset>
+		<input type=button value='Изменить' onClick='f1();'>
+	</form>
+	<script>
+		function f1() {
+			alert(document.forms[0].elements[0].type);
+			alert(document.forms[0].elements[1].outerHTML);
+			document.getElementsByTagName('legend')[0].innerText =
+				"Средняя специальное образование";
+		}
+	</script>
+</body>
+
+</html>
