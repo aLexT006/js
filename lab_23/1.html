@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+
+		let student = {
+			name: 'Саша',
+			age: 25,
+			isAdmin: false,
+			courses: ['html', 'css', 'js'],
+			curator: {
+				surname: "Иванова",
+				name: "Ольга Петровна"
+			},
+			"exelent student": null
+		};
+		let strJson = JSON.stringify(student);
+		alert("Из объекта в Json строку:" + strJson)
+	</script>
+</body>
+
+</html>
