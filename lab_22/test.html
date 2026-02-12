@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Тестирование</title>
+	<style>
+		body {
+			font-family: Arial;
+			max-width: 800px;
+			margin: 20px auto;
+			background: #f0f0f0;
+			padding: 20px;
+		}
+
+		.container {
+			background: white;
+			padding: 20px;
+			border-radius: 10px;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		.block {
+			background: #f9f9f9;
+			padding: 15px;
+			margin: 15px 0;
+			border-left: 5px solid #2196F3;
+		}
+
+		button {
+			background: #2196F3;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.green {
+			color: green;
+		}
+
+		.red {
+			color: red;
+		}
+
+		.drag-box {
+			display: flex;
+			gap: 20px;
+		}
+
+		.items {
+			background: #e3f2fd;
+			padding: 15px;
+			width: 200px;
+		}
+
+		.slots {
+			background: #fff3e0;
+			padding: 15px;
+			width: 200px;
+		}
+
+		.item {
+			background: #2196F3;
+			color: white;
+			padding: 10px;
+			margin: 5px 0;
+			border-radius: 5px;
+			cursor: grab;
+			text-align: center;
+		}
+
+		.slot {
+			background: white;
+			border: 2px dashed #ff9800;
+			padding: 10px;
+			margin: 5px 0;
+			min-height: 40px;
+		}
+
+		.result {
+			background: #e8f5e9;
+			padding: 15px;
+			margin-top: 20px;
+			display: none;
+		}
+
+		.grade {
+			font-size: 24px;
+			text-align: center;
+			padding: 15px;
+			color: white;
+			margin-top: 15px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>ТЕСТИРОВАНИЕ</h1>
+
+		<!-- Вопрос 1: Один вариант -->
+		<div class="block">
+			<h3>1. Флаг i в регулярных выражениях:</h3>
+			<input type="radio" name="q1" value="g"> g<br>
+			<input type="radio" name="q1" value="i"> i<br>
+			<input type="radio" name="q1" value="m"> m
+		</div>
+
+		<!-- Вопрос 2: Несколько вариантов -->
+		<div class="block">
+			<h3>2. Метасимволы regex:</h3>
+			<input type="checkbox" name="q2" value="dot"> .<br>
+			<input type="checkbox" name="q2" value="star"> *<br>
+			<input type="checkbox" name="q2" value="plus"> +<br>
+			<input type="checkbox" name="q2" value="hash"> #<br>
+			<input type="checkbox" name="q2" value="at"> @
+		</div>
+
+		<!-- Вопрос 3: Выпадающий список -->
+		<div class="block">
+			<h3>3. Регулярное выражение для цифры:</h3>
+			<select id="q3">
+				<option value="">-- Выберите --</option>
+				<option value="d">\d</option>
+				<option value="w">\w</option>
+				<option value="s">\s</option>
+			</select>
+		</div>
+
+		<!-- Вопрос 4: Регулярные выражения -->
+		<div class="block">
+			<h3>4. Введите строку, соответствующую ругулярному выражению:</h3>
+			<code style="background: #ddd; padding: 5px; display: block; margin-bottom: 10px;">
+                    /^\w+([\.\w]+)*\w@\w((\.\w)*\w+)*\.\w{2,3}$/
+                </code>
+			<input type="text" id="email">
+			<button onclick="checkEmail()">Проверить</button>
+			<p id="resEmail"></p>
+			<code style="background: #ddd; padding: 5px; display: block; margin-bottom: 10px;">
+                    /\d{3}-\d{2}-\d{2}/m
+                </code>
+			<input type="text" id="phone">
+			<button onclick="checkPhone()">Проверить</button>
+			<p id="resPhone"></p>
+		</div>
+
+		<!-- Вопрос 5: Drag and Drop -->
+		<div class="block">
+			<h3>5. Соответствие:</h3>
+			<div class="drag-box">
+				<div class="items" id="words">
+					<div class="item" draggable="true" ondragstart="drag(event)" id="d1">\d</div>
+					<div class="item" draggable="true" ondragstart="drag(event)" id="d2">\w</div>
+					<div class="item" draggable="true" ondragstart="drag(event)" id="d3">\s</div>
+				</div>
+				<div class="slots" id="slots">
+					<div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)" id="s1">Цифра</div>
+					<div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)" id="s2">Буква</div>
+					<div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)" id="s3">Пробел</div>
+				</div>
+			</div>
+		</div>
+
+		<button onclick="checkTest()" style="width: 100%; font-size: 18px;">ПРОВЕРИТЬ</button>
+
+		<div id="result" class="result"></div>
+		<div id="grade" class="grade"></div>
+	</div>
+
+	<script>
+		// Проверка email
+		function checkEmail() {
+			let regex = /^\w+([\.\w]+)*\w@\w((\.\w)*\w+)*\.\w{2,3}$/;
+			let str = document.getElementById('email').value;
+			let res = document.getElementById('resEmail');
+
+			if (regex.test(str)) res.innerHTML = '<span class="green">✓</span>';
+			else res.innerHTML = '<span class="red">✗</span>';
+		}
+
+		// Проверка телефона
+		function checkPhone() {
+			let regex = /\d{3}-\d{2}-\d{2}/;
+			let str = document.getElementById('phone').value;
+			let res = document.getElementById('resPhone');
+
+			if (regex.test(str)) res.innerHTML = '<span class="green">✓</span>';
+			else res.innerHTML = '<span class="red">✗</span>';
+		}
+
+		// Drag and Drop
+		function allowDrop(e) { e.preventDefault(); }
+		function drag(e) { e.dataTransfer.setData("text", e.target.id); }
+
+		function drop(e) {
+			e.preventDefault();
+			let slot = e.target.closest('.slot');
+			if (!slot) return;
+
+			let id = e.dataTransfer.getData("text");
+			let elem = document.getElementById(id);
+			let old = slot.querySelector('.item');
+
+			if (old) document.getElementById('words').appendChild(old);
+			slot.appendChild(elem);
+		}
+
+		// Проверка теста
+		function checkTest() {
+			let score = 0;
+			let result = '<h3>Результат:</h3>';
+
+			// Вопрос 1
+			let q1 = document.querySelector('input[name="q1"]:checked');
+			if (q1 && q1.value == 'i') { score++; result += '<p class="green">1. ✓</p>'; }
+			else result += '<p class="red">1. ✗</p>';
+
+			// Вопрос 2
+			let q2 = document.querySelectorAll('input[name="q2"]:checked');
+			let vals = Array.from(q2).map(cb => cb.value);
+			if (vals.length == 3 && vals.includes('dot') && vals.includes('star') && vals.includes('plus')) {
+				score++; result += '<p class="green">2. ✓</p>';
+			} else result += '<p class="red">2. ✗</p>';
+
+			// Вопрос 3
+			let q3 = document.getElementById('q3').value;
+			if (q3 == 'd') { score++; result += '<p class="green">3. ✓</p>'; }
+			else result += '<p class="red">3. ✗</p>';
+
+			// Вопрос 4
+			let email = document.getElementById('email').value;
+			let phone = document.getElementById('phone').value;
+			let emailRegex = /^\w+([\.\w]+)*\w@\w((\.\w)*\w+)*\.\w{2,3}$/;
+			let phoneRegex = /\d{3}-\d{2}-\d{2}/;
+
+			if (email && phone && emailRegex.test(email) && phoneRegex.test(phone)) {
+				score++; result += '<p class="green">4. ✓</p>';
+			} else result += '<p class="red">4. ✗</p>';
+
+			// Вопрос 5
+			let d1 = document.getElementById('d1');
+			let d2 = document.getElementById('d2');
+			let d3 = document.getElementById('d3');
+
+			if (d1.parentElement.id == 's1' && d2.parentElement.id == 's2' && d3.parentElement.id == 's3') {
+				score++; result += '<p class="green">5. ✓</p>';
+			} else result += '<p class="red">5. ✗</p>';
+
+			// Оценка
+			let percent = (score / 5) * 100;
+			let grade = '';
+			if (percent >= 90) grade = '5';
+			else if (percent >= 75) grade = '4';
+			else if (percent >= 60) grade = '3';
+			else grade = '2';
+
+			document.getElementById('result').innerHTML = result;
+			document.getElementById('result').style.display = 'block';
+
+			let gradeDiv = document.getElementById('grade');
+			gradeDiv.innerHTML = `Оценка: ${grade} (${score}/5)`;
+			gradeDiv.style.background = percent >= 60 ? '#4CAF50' : '#f44336';
+		}
+
+		// Возврат двойным кликом
+		document.addEventListener('dblclick', function (e) {
+			if (e.target.classList.contains('item') && e.target.parentElement.classList.contains('slot')) {
+				document.getElementById('words').appendChild(e.target);
+			}
+		});
+	</script>
+</body>
+
+</html>
