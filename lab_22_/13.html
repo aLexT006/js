@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторная работа №22: Задание 4</title>
+    <style>
+        .box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .valid {
+            color: green;
+            font-weight: bold;
+        }
+
+        .invalid {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Задание 4: Проверка условий шаблонов</h1>
+
+    <div class="box">
+        <h3>a) Шаблон E-mail</h3>
+        <p>Регулярное выражение: <code>/^\w+([\.\w]+)*\w@\w((\.\w)*\w+)*\.\w{2,3}$/</code></p>
+        <input type="text" id="emailInput" placeholder="test.user@example.com" size="40">
+        <button onclick="checkEmail()">Проверить</button>
+        <p id="resEmail"></p>
+    </div>
+
+    <div class="box">
+        <h3>b) Шаблон числа (формат XXX-XX-XX)</h3>
+        <p>Регулярное выражение: <code>/\d{3}-\d{2}-\d{2}/m</code></p>
+        <textarea id="dateInput" rows="3" cols="40">Текст 123-45-67 пример.</textarea>
+        <button onclick="checkDate()">Найти</button>
+        <p id="resDate"></p>
+    </div>
+
+    <script>
+        function checkEmail() {
+            const regexp = /^\w+([\.\w]+)*\w@\w((\.\w)*\w+)*\.\w{2,3}$/;
+            const str = document.getElementById('emailInput').value;
+            const res = document.getElementById('resEmail');
+
+            if (regexp.test(str)) {
+                res.innerHTML = "Результат: <span class='valid'>Соответствует (True)</span>";
+            } else {
+                res.innerHTML = "Результат: <span class='invalid'>Не соответствует (False)</span>";
+            }
+        }
+
+        function checkDate() {
+            const regexp = /\d{3}-\d{2}-\d{2}/m;
+            const str = document.getElementById('dateInput').value;
+            const res = document.getElementById('resDate');
+
+            const match = str.match(regexp);
+            if (match) {
+                res.innerHTML = "Найдено: <span class='valid'>" + match[0] + "</span> на позиции " + match.index;
+            } else {
+                res.innerHTML = "<span class='invalid'>Совпадений нет</span>";
+            }
+        }
+    </script>
+</body>
+
+</html>
