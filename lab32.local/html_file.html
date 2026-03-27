@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Логин</title>
+        <script>
+            function showHint(str) {
+                if(str.length == 0) {
+                    document.getElementById("txtHint").innerHTML = "";
+                    return;
+                }
+                else {
+                    let xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if(this.readyState == 4 && this.status == 200) document.getElementById("txtHint").innerHTML = this.responseText;
+                    }; 
+                    xhr.open("GET", "getajax.php?q=" + str, true);
+                    xhr.send();
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <p><b>Начните вводить номер вашего телефона, начиная с кода, в текстовое поле ниже:</b></p>
+        <form>
+            телефон: 8-0 <input type="text" onkeyup="showHint(this.value)">
+        </form>
+        <p>Предлагаемые варианты: <span id="txtHint"></span></p>
+    </body>
+</html>
